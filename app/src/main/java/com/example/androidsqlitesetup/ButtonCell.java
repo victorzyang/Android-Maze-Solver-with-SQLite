@@ -38,8 +38,8 @@ public class ButtonCell extends Thread{
         for (int r = 0; r < buttonCells.length; r++){
             for (int c = 0; c < buttonCells[r].length; c++){
                 if (buttonCells[r][c] == "wall"){
-                    wallsX.add(r);
-                    wallsY.add(c);
+                    wallsX.add(c);
+                    wallsY.add(r);
                 }
             }
         }

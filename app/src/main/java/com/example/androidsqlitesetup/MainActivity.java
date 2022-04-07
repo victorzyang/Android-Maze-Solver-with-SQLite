@@ -97,8 +97,8 @@ public class MainActivity extends AppCompatActivity {
                                 button.setText("S");
                                 startCellSelected = true;
                                 buttonCells[finalR][finalC] = "start"; //set the cell to the start cell
-                                startX = finalR;
-                                startY = finalC;
+                                startX = finalC;
+                                startY = finalR;
                                 startButton = buttons[finalR][finalC];
                             }
                         }else if(destinationCellSelected == false){ //if no destination cell has been selected yet
@@ -112,8 +112,8 @@ public class MainActivity extends AppCompatActivity {
                                 button.setText("D");
                                 destinationCellSelected = true;
                                 buttonCells[finalR][finalC] = "destination"; //set the cell to the destination cell
-                                goalX = finalR;
-                                goalY = finalC;
+                                goalX = finalC;
+                                goalY = finalR;
                             }
                         }else{
                             if(buttonCells[finalR][finalC] == "empty"){ //if clicked cell is an empty cell

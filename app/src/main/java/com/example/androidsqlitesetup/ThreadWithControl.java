@@ -22,7 +22,7 @@ public class ThreadWithControl extends Thread{ //ThreadWithControl inherits from
 
         Log.i(TAG, "Now calling recursive helper");
 
-        buttonCell.solveRecursiveHelper(startX, startY); //thread calls the recursive solver method
+        buttonCell.solveRecursiveHelper(startY, startX); //thread calls the recursive solver method
 
         buttonCell.insertDataIntoDatabase(); //TODO: add a method in ButtonCell.java for adding data to database
     }
