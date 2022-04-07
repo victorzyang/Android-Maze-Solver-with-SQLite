@@ -202,7 +202,7 @@ public class MainActivity extends AppCompatActivity {
                     buffer.append("Goal (Y): " + res.getString(6) + "\n");
                     buffer.append("Walls (X): " + res.getString(7) + "\n");
                     buffer.append("Walls (Y): " + res.getString(8) + "\n");
-                    buffer.append("Does Solution Exist? " + res.getString(9) + "\n\n");
+                    buffer.append("Does Solution Exist? " + res.getString(9) + "\n\n"); //TODO: fix this (this is incorrect)
                 }
 
                 //Show all data

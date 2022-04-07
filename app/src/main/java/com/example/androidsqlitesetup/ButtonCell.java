@@ -91,12 +91,13 @@ public class ButtonCell extends Thread{
     //have a recursive method
     public void solveRecursiveHelper(int row, int column){
         if(destinationReached == true){
-            solutionExists = true;
+            solutionExists = true; //does this not work?
             return;
         }else if(visited[row][column]==true || buttonCells[row][column]=="wall"){ //don't continue a search path on an already visited cell or a wall cell
             return;
         }else if(buttonCells[row][column]=="destination"){ //if destination is reached
             destinationReached = true; //end the search path once destination is reached
+            solutionExists = true; //adding solutionExists here did the trick
             Log.i(TAG, "Destination reached");
             return;
         }else{
