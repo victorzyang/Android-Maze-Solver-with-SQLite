@@ -13,13 +13,13 @@ import java.util.ArrayList;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-    //helper variables
+    //helper variables (this looks good)
     public static final String DATABASE_NAME = "Mazes.db";
-    //tables
+    //tables (this looks good)
     public static final String MAZES_TABLE = "Mazes";
-    //column ids
+    //column ids (this looks good)
     public static final String MAZES_TABLE_COLUMN_ID = "Id";
-    //columns
+    //columns (this looks good)
     public static final String NUM_OF_ROWS_COL = "Number_of_Rows"; //num of rows
     public static final String NUM_OF_COLS_COL = "Number_of_Columns"; //num of columns
     public static final String START_X_COL = "Start_X"; //start x
@@ -30,8 +30,9 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String WALLS_Y_COL = "Walls_Y"; //walls y
     public static final String SOLUTION_COL = "Possible_Solution"; //possible solution (this is either 0 or 1, which is true or false)
 
+    //this constructor looks good
     public DBHelper(Context context){
-        super(context, DATABASE_NAME , null, 1);
+        super(context, DATABASE_NAME , null, 1); //this is a SQLiteOpenHelper constructor
     }
 
     //May use the above constructor instead?
@@ -41,11 +42,14 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        Log.i("DBHelper", "Creating table"); //Database doesn't appear to be created somehow...
         db.execSQL("create table " + MAZES_TABLE + " (" + MAZES_TABLE_COLUMN_ID + " integer primary key autoincrement, " + NUM_OF_ROWS_COL + " integer, " + NUM_OF_COLS_COL + " integer, " + START_X_COL + " integer, " + START_Y_COL + " integer, " + GOAL_X_COL + " integer, " + GOAL_Y_COL + " integer, " + WALLS_X_COL + " blob, " + WALLS_Y_COL + " blob, " + SOLUTION_COL + " integer)");
+        //db.execSQL("create table " + MAZES_TABLE + " (" + MAZES_TABLE_COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + NUM_OF_ROWS_COL + " INTEGER, " + NUM_OF_COLS_COL + " INTEGER, " + START_X_COL + " INTEGER, " + START_Y_COL + " INTEGER, " + GOAL_X_COL + " INTEGER, " + GOAL_Y_COL + " INTEGER, " + WALLS_X_COL + " BLOB, " + WALLS_Y_COL + " BLOB, " + SOLUTION_COL + " INTEGER)"); //does this matter?
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) { //This method looks right...
+        Log.i("DBHelper", "onUpgrade() method called");
         db.execSQL("DROP TABLE IF EXISTS " + MAZES_TABLE);
         onCreate(db);
     }

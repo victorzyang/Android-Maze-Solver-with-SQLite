@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG =  MainActivity.class.getSimpleName();
 
-    DBHelper myDb;
+    DBHelper myDb; //this looks good
 
     // Scale of the game (number of rows and columns)
     private  static final int NUM_ROWS = 13;
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        myDb = new DBHelper(this);
+        myDb = new DBHelper(this); //This is correct, just like A1
 
         // Adding buttons with UI Threads
         TableLayout gameLayout = (TableLayout) findViewById(R.id.gameTable); //layout of the maze
@@ -189,17 +189,20 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
 
+                //Maybe take a look at fetching?
+
                 StringBuffer buffer = new StringBuffer();
                 while(res.moveToNext()){
-                    buffer.append("# of Rows: " + res.getString(0) + "\n");
-                    buffer.append("# of Columns: " + res.getString(1) + "\n");
-                    buffer.append("Start (X): " + res.getString(2) + "\n");
-                    buffer.append("Start (Y):" + res.getString(3) + "\n");
-                    buffer.append("Goal (X): " + res.getString(4) + "\n");
-                    buffer.append("Goal (Y): " + res.getString(5) + "\n");
-                    buffer.append("Walls (X): " + res.getString(6) + "\n");
-                    buffer.append("Walls (Y): " + res.getString(7) + "\n");
-                    buffer.append("Does Solution Exist? " + res.getString(8) + "\n\n");
+                    buffer.append("Id: " + res.getString(0) + "\n");
+                    buffer.append("# of Rows: " + res.getString(1) + "\n");
+                    buffer.append("# of Columns: " + res.getString(2) + "\n");
+                    buffer.append("Start (X): " + res.getString(3) + "\n");
+                    buffer.append("Start (Y):" + res.getString(4) + "\n");
+                    buffer.append("Goal (X): " + res.getString(5) + "\n");
+                    buffer.append("Goal (Y): " + res.getString(6) + "\n");
+                    buffer.append("Walls (X): " + res.getString(7) + "\n");
+                    buffer.append("Walls (Y): " + res.getString(8) + "\n");
+                    buffer.append("Does Solution Exist? " + res.getString(9) + "\n\n");
                 }
 
                 //Show all data
