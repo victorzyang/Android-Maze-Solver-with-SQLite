@@ -22,8 +22,8 @@ public class ButtonCell extends Thread{
     int startY;
     int goalX;
     int goalY;
-    ArrayList<Integer> wallsX = new ArrayList<>();
-    ArrayList<Integer> wallsY = new ArrayList<>();
+    ArrayList<Integer> wallsX = new ArrayList<>(); //determines what the X coordinates are for all walls
+    ArrayList<Integer> wallsY = new ArrayList<>(); //determines what the Y coordinates are for all walls
     int current_col;
     int current_row;
     boolean destinationReached;
@@ -34,6 +34,7 @@ public class ButtonCell extends Thread{
 
     private Random mRandom = new Random(); //needed for experiments
 
+    //setter for wallsX and wallsY
     private void setWalls(String[][] buttonCells){
         for (int r = 0; r < buttonCells.length; r++){
             for (int c = 0; c < buttonCells[r].length; c++){
@@ -72,6 +73,7 @@ public class ButtonCell extends Thread{
         this.myDb = myDb;
     }
 
+    //inserts a new maze into the database
     public void insertDataIntoDatabase(){
         boolean dataInserted = myDb.insertData(numRows, numCols, startX, startY, goalX, goalY, wallsX, wallsY, solutionExists);
         if (dataInserted) { //Something is wrong with this conditional...
@@ -91,13 +93,13 @@ public class ButtonCell extends Thread{
     //have a recursive method
     public void solveRecursiveHelper(int row, int column){
         if(destinationReached == true){
-            solutionExists = true; //does this not work?
+            solutionExists = true; //this doesn't work here, so I moved it to the second else-if here
             return;
         }else if(visited[row][column]==true || buttonCells[row][column]=="wall"){ //don't continue a search path on an already visited cell or a wall cell
             return;
         }else if(buttonCells[row][column]=="destination"){ //if destination is reached
             destinationReached = true; //end the search path once destination is reached
-            solutionExists = true; //adding solutionExists here did the trick
+            solutionExists = true; //adding solutionExists here works
             Log.i(TAG, "Destination reached");
             return;
         }else{

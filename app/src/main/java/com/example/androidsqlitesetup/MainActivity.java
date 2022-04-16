@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG =  MainActivity.class.getSimpleName();
 
-    DBHelper myDb; //this looks good
+    DBHelper myDb; //DBHelper instance used for inserting and reading database data
 
     // Scale of the game (number of rows and columns)
     private  static final int NUM_ROWS = 13;
@@ -179,6 +179,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //button for viewing all mazes in the Maze table
         viewDatabaseButton = findViewById(R.id.button_view_data);
         viewDatabaseButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -205,13 +206,14 @@ public class MainActivity extends AppCompatActivity {
                     buffer.append("Does Solution Exist? " + res.getString(9) + "\n\n"); //TODO: fix this (this is incorrect)
                 }
 
-                //Show all data
+                //Shows all data
                 showMessage("Database Data", buffer.toString());
             }
         });
 
     }
 
+    //method for displaying an alert showing data from a database table
     private void showMessage(String title, String message){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(true);

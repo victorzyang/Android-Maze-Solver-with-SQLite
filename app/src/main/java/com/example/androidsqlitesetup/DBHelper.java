@@ -35,25 +35,26 @@ public class DBHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME , null, 1); //this is a SQLiteOpenHelper constructor
     }
 
-    //May use the above constructor instead?
+    //Use the above constructor instead?
     public DBHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version); //I think the database gets initialized here
     }
 
     @Override
-    public void onCreate(SQLiteDatabase db) {
-        Log.i("DBHelper", "Creating table"); //Database doesn't appear to be created somehow...
+    public void onCreate(SQLiteDatabase db) { //required method to implement / creates all the tables in database
+        Log.i("DBHelper", "Creating table");
         db.execSQL("create table " + MAZES_TABLE + " (" + MAZES_TABLE_COLUMN_ID + " integer primary key autoincrement, " + NUM_OF_ROWS_COL + " integer, " + NUM_OF_COLS_COL + " integer, " + START_X_COL + " integer, " + START_Y_COL + " integer, " + GOAL_X_COL + " integer, " + GOAL_Y_COL + " integer, " + WALLS_X_COL + " blob, " + WALLS_Y_COL + " blob, " + SOLUTION_COL + " integer)");
         //db.execSQL("create table " + MAZES_TABLE + " (" + MAZES_TABLE_COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + NUM_OF_ROWS_COL + " INTEGER, " + NUM_OF_COLS_COL + " INTEGER, " + START_X_COL + " INTEGER, " + START_Y_COL + " INTEGER, " + GOAL_X_COL + " INTEGER, " + GOAL_Y_COL + " INTEGER, " + WALLS_X_COL + " BLOB, " + WALLS_Y_COL + " BLOB, " + SOLUTION_COL + " INTEGER)"); //does this matter?
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) { //This method looks right...
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) { //required method to implement
         Log.i("DBHelper", "onUpgrade() method called");
         db.execSQL("DROP TABLE IF EXISTS " + MAZES_TABLE);
         onCreate(db);
     }
 
+    //inserts a new maze to the database
     public boolean insertData(int numOfRows, int numOfCols, int start_x, int start_y, int goal_x, int goal_y, ArrayList<Integer> walls_x, ArrayList<Integer> walls_y, boolean solution_exists){
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -83,6 +84,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return true;
     }
 
+    //Method for getting data from Mazes table from database
     public Cursor getData(){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from " + MAZES_TABLE, null);
