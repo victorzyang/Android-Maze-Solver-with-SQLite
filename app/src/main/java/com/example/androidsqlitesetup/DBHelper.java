@@ -42,14 +42,14 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) { //required method to implement / creates all the tables in database
-        Log.i("DBHelper", "Creating table");
+        Log.i("DBHelper", "Creating table in Database");
         db.execSQL("create table " + MAZES_TABLE + " (" + MAZES_TABLE_COLUMN_ID + " integer primary key autoincrement, " + NUM_OF_ROWS_COL + " integer, " + NUM_OF_COLS_COL + " integer, " + START_X_COL + " integer, " + START_Y_COL + " integer, " + GOAL_X_COL + " integer, " + GOAL_Y_COL + " integer, " + WALLS_X_COL + " blob, " + WALLS_Y_COL + " blob, " + SOLUTION_COL + " integer)");
         //db.execSQL("create table " + MAZES_TABLE + " (" + MAZES_TABLE_COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + NUM_OF_ROWS_COL + " INTEGER, " + NUM_OF_COLS_COL + " INTEGER, " + START_X_COL + " INTEGER, " + START_Y_COL + " INTEGER, " + GOAL_X_COL + " INTEGER, " + GOAL_Y_COL + " INTEGER, " + WALLS_X_COL + " BLOB, " + WALLS_Y_COL + " BLOB, " + SOLUTION_COL + " INTEGER)"); //does this matter?
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) { //required method to implement
-        Log.i("DBHelper", "onUpgrade() method called");
+        Log.i("DBHelper", "Upgrading table in Database");
         db.execSQL("DROP TABLE IF EXISTS " + MAZES_TABLE);
         onCreate(db);
     }
@@ -57,6 +57,8 @@ public class DBHelper extends SQLiteOpenHelper {
     //inserts a new maze to the database
     public boolean insertData(int numOfRows, int numOfCols, int start_x, int start_y, int goal_x, int goal_y, ArrayList<Integer> walls_x, ArrayList<Integer> walls_y, boolean solution_exists){
         SQLiteDatabase db = this.getWritableDatabase();
+
+        Log.i("DBHelper", "Inserting new maze to Mazes table");
 
         //Create ContentValues
         ContentValues values = new ContentValues();
@@ -87,6 +89,7 @@ public class DBHelper extends SQLiteOpenHelper {
     //Method for getting data from Mazes table from database
     public Cursor getData(){
         SQLiteDatabase db = this.getReadableDatabase();
+        Log.i("DBHelper", "Selecting all mazes from Maze table");
         Cursor res = db.rawQuery("select * from " + MAZES_TABLE, null);
         return res;
     }
